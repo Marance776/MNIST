@@ -34,7 +34,7 @@ jobs:
         expect "Password: "
         send "P@ssw0rd\r"
         expect "#"
-        send "cd /home/runner/work/MNIST/MNIST/MNIST\r"
+        send "cd MNIST"
         expect "#"
         send "docker rmi mnist-app || true\r"
         expect "#"
