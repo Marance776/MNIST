@@ -15,8 +15,6 @@ jobs:
       run: |
         expect -c '
         spawn su -
-        expect "Password: "
-        send "P@ssw0rd\r"
         expect eof
         '
   
@@ -31,8 +29,6 @@ jobs:
         # 使用 expect 命令自動提供 su 密碼
         expect -c '
         spawn su -
-        expect "Password: "
-        send "P@ssw0rd\r"
         expect "#"
         send "cd MNIST"
         expect "#"
