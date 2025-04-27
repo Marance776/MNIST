@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Handwritten digit recognition</title>
+    <title>手寫數字識別</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -154,12 +154,12 @@
     </style>
 </head>
 <body>
-    <h1>Handwritten digit recognition</h1>
+    <h1>手寫數字識別</h1>
     
     <div class="container">
         <div class="tabs">
-            <div class="tab active" id="draw-tab">Hand-drawn input</div>
-            <div class="tab" id="upload-tab">Upload pictures</div>
+            <div class="tab active" id="draw-tab">手繪輸入</div>
+            <div class="tab" id="upload-tab">上傳圖片</div>
         </div>
         
         <div class="tab-content active" id="draw-content">
@@ -167,28 +167,28 @@
                 <canvas id="drawing-canvas" width="280" height="280"></canvas>
             </div>
             <div>
-                <button id="clear-button" class="button secondary">Clear</button>
-                <button id="predict-draw-button" class="button">Identify numbers</button>
+                <button id="clear-button" class="button secondary">清空</button>
+                <button id="predict-draw-button" class="button">辨識數字</button>
             </div>
         </div>
         
         <div class="tab-content" id="upload-content">
             <div id="upload-container">
                 <input type="file" id="image-upload" accept="image/*">
-                <img id="image-preview" alt="Preview Image">
+                <img id="image-preview" alt="預覽圖片">
                 <div>
-                    <button id="predict-upload-button" class="button" disabled>Identify numbers</button>
+                    <button id="predict-upload-button" class="button" disabled>辨識數字</button>
                 </div>
             </div>
         </div>
         
         <div class="loading">
             <div class="spinner"></div>
-            <p>Identifying...</p>
+            <p>正在辨識中...</p>
         </div>
         
         <div class="result-container" style="display: none;">
-            <h2>Identification results</h2>
+            <h2>辨識結果</h2>
             <div class="result" id="prediction-result"></div>
         </div>
     </div>
@@ -342,7 +342,7 @@
                 })
                 .then(response => {
                     if (!response.ok) {
-                        throw new Error('Network Error');
+                        throw new Error('網絡錯誤');
                     }
                     return response.json();
                 })
@@ -353,7 +353,7 @@
                 })
                 .catch(error => {
                     document.querySelector('.loading').style.display = 'none';
-                    alert('An error occurred: ' + error.message);
+                    alert('發生錯誤: ' + error.message);
                 });
             }
         });
