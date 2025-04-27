@@ -21,23 +21,32 @@ jobs:
     
     - name: Build and deploy
       run: |
-        cd MNIST
-        
-        # 移除舊的 Docker 映像 (如果存在)
-        docker rmi mnist-app || true
-        docker rmi easzlab.io.local:5000/mnist-app || true
-        
-        # 構建、標記和推送映像
-        docker build -t mnist-app .
-        docker image tag mnist-app easzlab.io.local:5000/mnist-app
-        docker image push easzlab.io.local:5000/mnist-app
-        
-        # 更新 Kubernetes 部署
-        kubectl delete -n default deployment mnist-app || true
-        
-        # 等待2分鐘
-        echo "Waiting for 2 minutes before applying the new deployment..."
-        sleep 120
-        
-        # 應用新的部署
-        kubectl apply -f mnist-app-deployment.yaml
+        # 使用 expect 命令自動提供 su 密碼
+        expect -c '
+        spawn su -
+        expect "Password: "
+        send "P@ssw0rd\r"
+        expect "#"
+        send "cd /home/runner/work/MNIST/MNIST/MNIST\r"
+        expect "#"
+        send "docker rmi mnist-app || true\r"
+        expect "#"
+        send "docker rmi easzlab.io.local:5000/mnist-app || true\r"
+        expect "#"
+        send "docker build -t mnist-app .\r"
+        expect "#"
+        send "docker image tag mnist-app easzlab.io.local:5000/mnist-app\r"
+        expect "#"
+        send "docker image push easzlab.io.local:5000/mnist-app\r"
+        expect "#"
+        send "kubectl delete -n default deployment mnist-app || true\r"
+        expect "#"
+        send "echo \"Waiting for 2 minutes before applying the new deployment...\"\r"
+        expect "#"
+        send "sleep 120\r"
+        expect "#"
+        send "kubectl apply -f mnist-app-deployment.yaml\r"
+        expect "#"
+        send "exit\r"
+        expect eof
+        '
