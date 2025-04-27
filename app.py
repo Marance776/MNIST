@@ -132,7 +132,7 @@ def health():
 # 靜態應用的路由
 @static_app.route('/', methods=['GET'])
 def index():
-    return send_from_directory('static', 'index.html')
+    return send_from_directory('static', 'index-zh.html')
 
 @static_app.route('/<path:path>', methods=['GET'])
 def static_files(path):
