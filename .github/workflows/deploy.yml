@@ -20,19 +20,27 @@ jobs:
         expect eof
         '
   
-    - name: Clone repository
-      run: |
-        rm -rf MNIST || true
-        git clone https://github.com/Marance776/MNIST.git
-        sleep 60
-        cd MNIST
-        ls -a
+    # - name: Clone repository
+    #   run: |
+    #     rm -rf MNIST || true
+    #     git clone https://github.com/Marance776/MNIST.git
+    #     sleep 60
+    #     cd MNIST
+    #     ls -a
     
     - name: Build and deploy
       run: |
         # 使用 expect 命令自動提供 su 密碼
         expect -c '
         spawn su -
+        expect "#"
+        send "rm -rf MNIST || true\r"
+        expect "#"
+        send "git clone https://github.com/Marance776/MNIST.git\r"
+        expect "#"
+        send "sleep 60\r"
+        expect "#"
+        send "ls -a\r"
         expect "#"
         send "cd MNIST\r"
         expect "#"
