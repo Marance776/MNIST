@@ -18,3 +18,5 @@ def predict_digit(image_path):
 # 使用示例
 digit = predict_digit("ph.png")
 print(f"預測的數字是: {digit}")
+ 
+ 
