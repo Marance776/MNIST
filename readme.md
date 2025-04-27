@@ -1,1 +1,1 @@
-# H1 MNIST for school project.
+# MNIST for school project.
