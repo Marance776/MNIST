@@ -37,11 +37,11 @@ spec:
   ports:
   - port: 80
     targetPort: 80
-    nodePort: 3080
+    nodePort: 30080
     protocol: TCP
     name: http
   - port: 5001
-    nodePort: 3001
+    nodePort: 30001
     targetPort: 5000
     protocol: TCP
     name: api
