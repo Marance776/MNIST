@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mnist-app
+  labels:
+    app: mnist-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mnist-app
+  template:
+    metadata:
+      labels:
+        app: mnist-app
+    spec:
+      containers:
+      - name: mnist-app
+        image: easzlab.io.local:5000/mnist-app
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
+          name: http
+        - containerPort: 5000
+          name: api
+      imagePullSecrets: []
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mnist-app
+  labels:
+    app: mnist-app
+spec:
+  externalIPs:
+  - 172.16.191.130
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 80
+    protocol: TCP
+    name: http
+  - port: 5001
+    targetPort: 5000
+    protocol: TCP
+    name: api
+  selector:
+    app: mnist-app
+

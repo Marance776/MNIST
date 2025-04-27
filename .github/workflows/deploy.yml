@@ -1,0 +1,43 @@
+name: Deploy MNIST App
+
+on:
+  push:
+    branches: [ main ]  # 或者您的主分支名稱
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: self-hosted  # 使用您設置的自託管執行器
+    
+    steps:
+    - name: Clean workspace
+      run: |
+        rm -rf MNIST || true
+    
+    - name: Clone repository
+      run: |
+        git clone https://github.com/Marance776/MNIST.git
+    
+    - name: Build and deploy
+      run: |
+        cd MNIST
+        
+        # 移除舊的 Docker 映像 (如果存在)
+        docker rmi mnist-app || true
+        docker rmi easzlab.io.local:5000/mnist-app || true
+        
+        # 構建、標記和推送映像
+        docker build -t mnist-app .
+        docker image tag mnist-app easzlab.io.local:5000/mnist-app
+        docker image push easzlab.io.local:5000/mnist-app
+        
+        # 更新 Kubernetes 部署
+        kubectl delete -n default deployment mnist-app || true
+        
+        # 等待2分鐘
+        echo "Waiting for 2 minutes before applying the new deployment..."
+        sleep 120
+        
+        # 應用新的部署
+        kubectl apply -f mnist-app-deployment.yaml

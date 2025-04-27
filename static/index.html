@@ -336,7 +336,7 @@
                 const formData = new FormData();
                 formData.append('image', imageBlob);
                 
-                fetch('http://localhost:5000/predict', {
+                fetch('http://172.16.191.130:5001/predict', {
                     method: 'POST',
                     body: formData
                 })
