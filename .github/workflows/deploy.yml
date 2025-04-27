@@ -13,8 +13,15 @@ jobs:
     steps:
     - name: Clean workspace
       run: |
-        rm -rf MNIST || true
-    
+        expect -c '
+        spawn su -
+        expect "Password: "
+        send "P@ssw0rd\r"
+        expect "#"
+        send "rm -rf MNIST || true"
+        expect eof
+        '
+  
     - name: Clone repository
       run: |
         git clone https://github.com/Marance776/MNIST.git
