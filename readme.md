@@ -1,0 +1,1 @@
+# H1 MNIST for school project
