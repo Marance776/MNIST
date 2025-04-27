@@ -24,7 +24,9 @@ jobs:
       run: |
         rm -rf MNIST || true
         git clone https://github.com/Marance776/MNIST.git
+        sleep 60
         cd MNIST
+        ll
     
     - name: Build and deploy
       run: |
