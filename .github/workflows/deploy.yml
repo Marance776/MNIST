@@ -22,7 +22,7 @@ jobs:
       run: |
         rm -rf MNIST/
         git clone https://github.com/Marance776/MNIST.git
-        cd MNIST
+        cd MNIST\r
     
     - name: Build and deploy
       run: |
@@ -30,7 +30,7 @@ jobs:
         expect -c '
         spawn su -
         expect "#"
-        send "cd MNIST"
+        send "cd MNIST\r"
         expect "#"
         send "docker rmi mnist-app || true\r"
         expect "#"
