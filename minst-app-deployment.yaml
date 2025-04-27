@@ -33,14 +33,15 @@ metadata:
     app: mnist-app
 spec:
   externalIPs:
-  - 172.16.191.130
   type: LoadBalancer
   ports:
   - port: 80
     targetPort: 80
+    nodePort: 3080
     protocol: TCP
     name: http
   - port: 5001
+    nodePort: 3001
     targetPort: 5000
     protocol: TCP
     name: api
