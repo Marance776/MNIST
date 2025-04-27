@@ -22,6 +22,7 @@ jobs:
   
     - name: Clone repository
       run: |
+        rm -rf MNIST || true
         git clone https://github.com/Marance776/MNIST.git
         cd MNIST
     
