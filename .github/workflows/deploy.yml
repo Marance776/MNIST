@@ -17,14 +17,14 @@ jobs:
         spawn su -
         expect "Password: "
         send "P@ssw0rd\r"
-        expect "#"
-        send "rm -rf MNIST/ || true"
         expect eof
         '
   
     - name: Clone repository
       run: |
+        rm -rf MNIST/
         git clone https://github.com/Marance776/MNIST.git
+        cd MNIST
     
     - name: Build and deploy
       run: |
