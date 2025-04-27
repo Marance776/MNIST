@@ -15,14 +15,15 @@ jobs:
       run: |
         expect -c '
         spawn su -
+        expect "#"
+        send "rm -rf MNIST || true\r"
         expect eof
         '
   
     - name: Clone repository
       run: |
-        rm -rf MNIST/
         git clone https://github.com/Marance776/MNIST.git
-        cd MNIST\r
+        cd MNIST
     
     - name: Build and deploy
       run: |
