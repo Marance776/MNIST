@@ -18,7 +18,7 @@ jobs:
         expect "Password: "
         send "P@ssw0rd\r"
         expect "#"
-        send "rm -rf MNIST || true"
+        send "rm -rf MNIST/ || true"
         expect eof
         '
   
